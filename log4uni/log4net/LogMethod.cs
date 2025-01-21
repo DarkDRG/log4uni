@@ -49,7 +49,7 @@ namespace log4net
                     break;
             }
         }
-        
+
         public void Call(string message, Exception exception)
         {
             if (!target.IsEnabled(logType)) return;
@@ -148,7 +148,7 @@ namespace log4net
                     break;
             }
         }
-        
+
         public void CallFormat(string format, object arg0, object arg1)
         {
             if (!target.IsEnabled(logType)) return;
@@ -181,7 +181,7 @@ namespace log4net
                     break;
             }
         }
-        
+
         public void CallFormat(string format, object arg0, object arg1, object arg2)
         {
             if (!target.IsEnabled(logType)) return;
@@ -214,7 +214,7 @@ namespace log4net
                     break;
             }
         }
-        
+
         public void CallFormat(string format, params object[] args)
         {
             if (!target.IsEnabled(logType)) return;
@@ -263,22 +263,26 @@ namespace log4net
                 case LogExt.LogType.Fatal:
                     return Level.Fatal;
             }
+
             return Level.Verbose;
         }
 
         public void CallFormat(UnityEngine.Object ctx, string format, params object[] args)
         {
             if (!target.IsEnabled(logType)) return;
-            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(), new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(),
+                new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
             if (ctx != null)
                 evt.Properties[UnityDefaultLogAppender.UnityContext] = ctx;
             target.Logger.Log(evt);
         }
+
         public void Call(UnityEngine.Object ctx, string msg)
         {
             if (!target.IsEnabled(logType)) return;
-            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(), msg, null);
-            if(ctx != null)
+            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(), msg,
+                null);
+            if (ctx != null)
                 evt.Properties[UnityDefaultLogAppender.UnityContext] = ctx;
             target.Logger.Log(evt);
         }
@@ -286,12 +290,18 @@ namespace log4net
         public void Call(UnityEngine.Object ctx, string msg, Exception e)
         {
             if (!target.IsEnabled(logType)) return;
-            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(), msg, e);
+            var evt = new LoggingEvent(ThisDeclaringType, target.Logger.Repository, target.Logger.Name, GetLevel(), msg,
+                e);
             if (ctx != null)
                 evt.Properties[UnityDefaultLogAppender.UnityContext] = ctx;
             target.Logger.Log(evt);
         }
 
-        private static readonly Type ThisDeclaringType = typeof(LogImpl);
+
+        
+        private static Type ThisDeclaringType = typeof(LogImpl);
+
+        // Used to solve the error of not being able to find the corresponding stack information when release il2cpp inline
+        public static void SetDeclaringType(Type declaringType) => ThisDeclaringType = declaringType;
     }
-    }
+}
