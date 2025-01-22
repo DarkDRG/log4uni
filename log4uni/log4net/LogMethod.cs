@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using log4net.Core;
 using log4net.Unity;
 using log4net.Util;
@@ -17,6 +18,7 @@ namespace log4net
             this.logType = logType;
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Call(string message)
         {
             if (!target.IsEnabled(logType)) return;
@@ -50,6 +52,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Call(string message, Exception exception)
         {
             if (!target.IsEnabled(logType)) return;
@@ -83,6 +86,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(IFormatProvider formatProvider, string format, params object[] args)
         {
             if (!target.IsEnabled(logType)) return;
@@ -116,6 +120,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(string format, object arg0)
         {
             if (!target.IsEnabled(logType)) return;
@@ -149,6 +154,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(string format, object arg0, object arg1)
         {
             if (!target.IsEnabled(logType)) return;
@@ -182,6 +188,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(string format, object arg0, object arg1, object arg2)
         {
             if (!target.IsEnabled(logType)) return;
@@ -215,6 +222,7 @@ namespace log4net
             }
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(string format, params object[] args)
         {
             if (!target.IsEnabled(logType)) return;
@@ -267,6 +275,7 @@ namespace log4net
             return Level.Verbose;
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void CallFormat(UnityEngine.Object ctx, string format, params object[] args)
         {
             if (!target.IsEnabled(logType)) return;
@@ -277,6 +286,7 @@ namespace log4net
             target.Logger.Log(evt);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Call(UnityEngine.Object ctx, string msg)
         {
             if (!target.IsEnabled(logType)) return;
@@ -287,6 +297,7 @@ namespace log4net
             target.Logger.Log(evt);
         }
 
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Call(UnityEngine.Object ctx, string msg, Exception e)
         {
             if (!target.IsEnabled(logType)) return;
