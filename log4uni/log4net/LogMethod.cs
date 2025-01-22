@@ -310,7 +310,7 @@ namespace log4net
 
 
         
-        private static Type ThisDeclaringType = typeof(LogImpl);
+        private static Type ThisDeclaringType = typeof(LogMethod);
 
         // Used to solve the error of not being able to find the corresponding stack information when release il2cpp inline
         public static void SetDeclaringType(Type declaringType) => ThisDeclaringType = declaringType;
